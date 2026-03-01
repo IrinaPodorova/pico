@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AuthMaster — API</title>
+
+  <link rel="icon" href="images/favicon.jpg">
+
+  <!-- Pico CSS -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<header class="header container" role="banner">
+
+<div class="brand">
+  <a href="index.html" aria-label="AuthMaster — Главная">
+    <img src="images/logo.jpg"
+         alt="AuthMaster"
+         class="brand__logo">
+  </a>
+  <span class="brand__title">AuthMaster</span>
+</div>
+
+  <nav class="header__nav" role="navigation">
+    <a href="index.html">Главная</a>
+    <a href="jwt.html">JWT</a>
+    <a href="oauth.html">OAuth 2.0</a>
+    <a href="comparison.html">Сравнение</a>
+    <a href="install.html">Установка</a>
+    <a href="api.html" aria-current="page">API</a>
+    <a href="docs.html">Документация</a>
+    <a href="contact.html">Контакты</a>
+  </nav>
+
+  <button class="burger" aria-label="Открыть меню" aria-expanded="false">
+    <span class="burger__box">
+      <span class="burger__bar"></span>
+      <span class="burger__bar"></span>
+      <span class="burger__bar"></span>
+    </span>
+  </button>
+
+</header>
+
+<main class="page container" role="main">
+
+  <!-- LEFT COLUMN -->
+  <div class="main">
+    <article>
+
+  <h1>API Reference</h1>
+
+  <p>
+    Документация по REST API для работы с аутентификацией
+    и авторизацией.
+  </p>
+
+  <div class="inner-card">
+    <strong>Обязательный заголовок:</strong>
+    <code>Content-Type: application/json</code>
+  </div>
+
+</article>
+
+   <article id="authentication">
+
+  <h2><mark>Аутентификация API</mark></h2>
+
+  <div class="concepts">
+
+    <!-- JWT Header -->
+    <section class="card-item">
+      <h3>Передача JWT токена</h3>
+
+      <p>
+        Для доступа к защищённым эндпоинтам необходимо передавать JWT
+        в заголовке Authorization:
+      </p>
+
+<pre><code>Authorization: Bearer {your_jwt_token}</code></pre>
+
+    </section>
+
+    <!-- Base URL -->
+    <section class="card-item">
+      <h3>Базовый URL</h3>
+
+<pre><code>https://api.authmaster.example.com/v1</code></pre>
+
+      <div class="inner-card">
+        Все запросы должны содержать:
+        <code>Content-Type: application/json</code>
+      </div>
+    </section>
+
+    <!-- Response Format -->
+    <section class="card-item">
+      <h3>Формат ответа</h3>
+      <p>Все ответы возвращаются в формате JSON.</p>
+    </section>
+
+    <!-- Status Codes -->
+    <section class="card-item">
+      <h3>Коды статусов</h3>
+
+      <ul>
+        <li><strong>200</strong> — Успешный запрос</li>
+        <li><strong>201</strong> — Успешное создание</li>
+        <li><strong>400</strong> — Неверный запрос</li>
+        <li><strong>401</strong> — Неавторизованный доступ</li>
+        <li><strong>403</strong> — Доступ запрещён</li>
+        <li><strong>404</strong> — Ресурс не найден</li>
+        <li><strong>500</strong> — Внутренняя ошибка сервера</li>
+      </ul>
+    </section>
+
+  </div>
+
+</article>
+  <article id="auth-endpoints">
+
+  <h2><mark>Эндпоинты аутентификации</mark></h2>
+
+  <div class="concepts">
+
+    <!-- REGISTER -->
+    <section class="card-item">
+      <h3>POST /auth/register</h3>
+      <p><strong>Регистрация нового пользователя</strong></p>
+
+<pre><code>{
+  "email": "user@example.com",
+  "password": "securePassword123",
+  "name": "Иван Иванов"
+}</code></pre>
+
+      <div class="inner-card">
+        <strong>Успешный ответ (201)</strong>
+<pre><code>{
+  "success": true,
+  "message": "Пользователь успешно зарегистрирован"
+}</code></pre>
+      </div>
+
+      <h4>Ошибки:</h4>
+      <ul>
+        <li>400 — Пользователь уже существует</li>
+        <li>400 — Неверный формат email</li>
+        <li>400 — Слабый пароль</li>
+      </ul>
+    </section>
+
+    <!-- LOGIN -->
+    <section class="card-item">
+      <h3>POST /auth/login</h3>
+      <p><strong>Вход пользователя</strong></p>
+
+<pre><code>{
+  "email": "user@example.com",
+  "password": "securePassword123"
+}</code></pre>
+
+      <div class="inner-card">
+        <strong>Успешный ответ (200)</strong>
+<pre><code>{
+  "token": "...",
+  "refreshToken": "..."
+}</code></pre>
+      </div>
+    </section>
+
+  </div>
+
+</article>
+
+    <article id="user-endpoints">
+
+  <h2><mark>Эндпоинты пользователей</mark></h2>
+
+  <div class="concepts">
+
+    <section class="card-item">
+      <h3>GET /users/me</h3>
+<pre><code>Authorization: Bearer {access_token}</code></pre>
+    </section>
+
+    <section class="card-item">
+      <h3>PUT /users/me</h3>
+<pre><code>{
+  "name": "Новое имя",
+  "email": "newemail@example.com"
+}</code></pre>
+    </section>
+
+  </div>
+</article> 
+<article id="admin-endpoints">
+
+  <h2><mark>Эндпоинты администратора</mark></h2>
+
+  <div class="concepts">
+
+    <!-- GET USERS -->
+    <section class="card-item">
+      <h3>GET /admin/users</h3>
+      <p><strong>Получение списка пользователей</strong></p>
+
+      <div class="inner-card">
+        <strong>Требуются права администратора</strong><br>
+        Authorization: Bearer {admin_access_token}
+      </div>
+
+      <h4>Параметры запроса:</h4>
+      <ul>
+        <li><strong>page</strong> — номер страницы (по умолчанию: 1)</li>
+        <li><strong>limit</strong> — количество пользователей (по умолчанию: 20)</li>
+        <li><strong>search</strong> — поиск по email или имени</li>
+      </ul>
+
+      <h4>Успешный ответ (200):</h4>
+
+<pre><code>{
+  "success": true,
+  "users": [
+    {
+      "id": "user_123456",
+      "email": "user@example.com",
+      "name": "Иван Иванов",
+      "role": "user",
+      "createdAt": "2025-01-15T10:30:00Z",
+      "lastLogin": "2025-01-25T09:15:00Z"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "limit": 20,
+    "total": 150,
+    "pages": 8
+  }
+}</code></pre>
+
+    </section>
+
+    <!-- UPDATE ROLE -->
+    <section class="card-item">
+      <h3>PUT /admin/users/{userId}/role</h3>
+      <p><strong>Изменение роли пользователя</strong></p>
+
+      <div class="inner-card">
+        Authorization: Bearer {admin_access_token}
+      </div>
+
+      <h4>Тело запроса:</h4>
+
+<pre><code>{
+  "role": "admin"
+}</code></pre>
+
+      <h4>Успешный ответ (200):</h4>
+
+<pre><code>{
+  "success": true,
+  "message": "Роль пользователя обновлена",
+  "user": {
+    "id": "user_123456",
+    "email": "user@example.com",
+    "role": "admin"
+  }
+}</code></pre>
+
+    </section>
+
+  </div>
+
+</article>
+
+   <article id="testing">
+
+  <h2><mark>Тестирование API</mark></h2>
+
+  <div class="concepts">
+
+    <section class="card-item">
+      <h3>Тестовая среда</h3>
+<pre><code>https://sandbox.api.authmaster.example.com/v1</code></pre>
+    </section>
+
+    <section class="card-item">
+      <h3>Тестовые данные</h3>
+<pre><code>{
+  "email": "test@authmaster.example.com",
+  "password": "testPassword123"
+}</code></pre>
+    </section>
+
+  </div>
+
+</article>
+
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <aside class="sidebar" role="complementary">
+
+    <article>
+      <h3>Быстрая навигация</h3>
+      <nav>
+        <ul>
+          <li><a href="#authentication">Аутентификация API</a></li>
+          <li><a href="#auth-endpoints">Эндпоинты аутентификации</a></li>
+          <li><a href="#user-endpoints">Эндпоинты пользователей</a></li>
+          <li><a href="#oauth-endpoints">Эндпоинты OAuth</a></li>
+          <li><a href="#admin-endpoints">Эндпоинты администратора</a></li>
+          <li><a href="#testing">Тестирование API</a></li>
+        </ul>
+      </nav>
+    </article>
+
+    <article>
+      <h3>Полезные ссылки</h3>
+      <ul>
+        <li><a href="docs.html">Полная документация</a></li>
+        <li><a href="install.html">Примеры установки</a></li>
+        <li><a href="jwt.html">Подробнее о JWT</a></li>
+        <li><a href="oauth.html">Подробнее о OAuth</a></li>
+      </ul>
+    </article>
+
+  </aside>
+
+</main>
+
+<footer class="footer container" role="contentinfo">
+  © 2025 AuthMaster — Учебный проект. Все права защищены.
+</footer>
+
+</div>
+
+<script src="js/main.js" defer></script>
+
+</body>
+</html>

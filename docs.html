@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AuthMaster — Документация</title>
+
+  <link rel="icon" href="images/favicon.jpg">
+
+  <!-- Pico CSS -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<header class="header container" role="banner">
+
+<div class="brand">
+  <a href="index.html" aria-label="AuthMaster — Главная">
+    <img src="images/logo.jpg"
+         alt="AuthMaster"
+         class="brand__logo">
+  </a>
+  <span class="brand__title">AuthMaster</span>
+</div>
+
+  <nav class="header__nav" role="navigation" aria-label="Главная навигация">
+    <a href="index.html">Главная</a>
+    <a href="jwt.html">JWT</a>
+    <a href="oauth.html">OAuth 2.0</a>
+    <a href="comparison.html">Сравнение</a>
+    <a href="install.html">Установка</a>
+    <a href="api.html">API</a>
+    <a href="docs.html" aria-current="page">Документация</a>
+    <a href="contact.html">Контакты</a>
+  </nav>
+
+  <button class="burger" aria-label="Открыть меню" aria-expanded="false">
+    <span class="burger__box">
+      <span class="burger__bar"></span>
+      <span class="burger__bar"></span>
+      <span class="burger__bar"></span>
+    </span>
+  </button>
+
+</header>
+
+<main class="page container" role="main">
+
+  <!-- LEFT COLUMN -->
+  <div class="main">
+<article id="introduction">
+
+  <h1>Полная документация AuthMaster</h1>
+
+  <p>
+    AuthMaster — это учебный проект для демонстрации современных методов
+    аутентификации и авторизации с использованием JWT и OAuth 2.0.
+    В этой документации вы найдете подробные инструкции по настройке,
+    использованию и интеграции системы в ваши приложения.
+  </p>
+
+</article>
+
+
+<article id="overview">
+
+  <h2><mark>Введение</mark></h2>
+
+  <div class="concepts">
+
+    <section>
+
+      <p>
+        AuthMaster предоставляет готовые решения для аутентификации пользователей,
+        включая регистрацию, вход, управление токенами и интеграцию с внешними
+        провайдерами. Проект построен на принципах безопасности и масштабируемости.
+      </p>
+
+      <div class="inner-card">
+        <ul>
+          <li><strong>Версия:</strong> 1.0.0 (на 10 октября 2025)</li>
+          <li><strong>Требования:</strong> Node.js 14+, PostgreSQL или MongoDB</li>
+          <li><strong>Лицензия:</strong> MIT</li>
+        </ul>
+      </div>
+
+    </section>
+
+  </div>
+
+</article>
+
+
+<article id="installation">
+
+  <h2><mark>Установка и настройка</mark></h2>
+
+  <div class="concepts">
+
+    <section class="card-item">
+      <h3>Клонирование проекта</h3>
+<pre><code>git clone https://github.com/authmaster/project.git
+cd project
+npm install</code></pre>
+    </section>
+
+    <section class="card-item">
+      <h3>Конфигурация .env</h3>
+<pre><code>DATABASE_URL=postgres://...
+JWT_SECRET=your_secret_key
+OAUTH_GOOGLE_CLIENT_ID=...
+OAUTH_GOOGLE_CLIENT_SECRET=...</code></pre>
+    </section>
+
+    <section class="card-item">
+      <h3>Запуск сервера</h3>
+<pre><code>npm start</code></pre>
+    </section>
+
+  </div>
+
+</article>
+
+
+<article id="authentication">
+
+  <h2><mark>Аутентификация с JWT</mark></h2>
+
+  <div class="concepts">
+
+    <section>
+      <p>
+        После входа пользователь получает access и refresh токены.
+      </p>
+
+<pre><code>fetch('https://api.authmaster.example.com/v1/auth/login', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    email: 'user@example.com',
+    password: 'securePassword123'
+  })
+});</code></pre>
+
+      <div class="inner-card">
+        Подробнее: <a href="jwt.html">JWT документация</a>
+      </div>
+    </section>
+
+  </div>
+
+</article>
+
+  <article id="oauth-integration">
+
+  <h2><mark>Интеграция с OAuth 2.0</mark></h2>
+
+  <div class="concepts">
+
+    <section>
+
+<pre><code>window.location.href =
+'https://api.authmaster.example.com/v1/oauth/google?redirect_uri=https://yourapp.com/callback';</code></pre>
+
+      <div class="inner-card">
+        Подробнее: <a href="oauth.html">OAuth 2.0 документация</a>
+      </div>
+
+    </section>
+
+  </div>
+
+</article>
+
+
+<article id="api-reference">
+
+  <h2><mark>API референс</mark></h2>
+
+  <div class="concepts">
+
+    <section class="card-item">
+      <p>
+        Полное описание эндпоинтов API доступно в разделе
+        <a href="api.html">API</a>.
+      </p>
+    </section>
+
+  </div>
+
+</article>
+
+    <article id="examples">
+    <h2><mark>Примеры использования</mark></h2>
+
+<pre><code>const axios = require('axios');
+
+async function login(email, password) {
+  const response = await axios.post(
+    'https://api.authmaster.example.com/v1/auth/login',
+    { email, password }
+  );
+  return response.data.token;
+}</code></pre>
+
+<pre><code>import { useState } from 'react';
+
+function LoginForm() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+}</code></pre>
+    </article>
+
+    <article id="faq">
+  <h2><mark>Часто задаваемые вопросы</mark></h2>
+
+  <details>
+    <summary><strong>Как обработать истечение токена?</strong></summary>
+    <p>Используйте refresh token через <code>/auth/refresh</code>.</p>
+  </details>
+
+  <details>
+    <summary><strong>Поддерживается ли двухфакторная аутентификация?</strong></summary>
+    <p>В текущей версии нет.</p>
+  </details>
+
+  <details>
+    <summary><strong>Как настроить кастомные роли?</strong></summary>
+    <p>Используйте админ-эндпоинты.</p>
+  </details>
+
+</article>
+
+    <article id="contributing">
+      <h2><mark>Вклад в проект</mark></h2>
+        <p>
+    AuthMaster — открытый проект, и я буду рада вашей помощи! 
+    Если вы нашли баг, хотите предложить улучшение или добавить новую 
+    функциональность — заходите в репозиторий на GitHub.
+  </p>
+     <a href="https://github.com/IrinaPodorova/auth-learning-site"
+   target="_blank"
+   role="button"
+   class="contrast">
+   Перейти в репозиторий
+</a>
+    </article>
+
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <aside class="sidebar" role="complementary">
+
+    <article>
+      <h3>Быстрая навигация</h3>
+      <nav>
+        <ul>
+          <li><a href="#introduction">Введение</a></li>
+          <li><a href="#installation">Установка</a></li>
+          <li><a href="#authentication">Аутентификация JWT</a></li>
+          <li><a href="#oauth-integration">OAuth интеграция</a></li>
+          <li><a href="#api-reference">API референс</a></li>
+          <li><a href="#examples">Примеры</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contributing">Вклад</a></li>
+        </ul>
+      </nav>
+    </article>
+
+    <article>
+      <h3>Полезные ссылки</h3>
+      <ul>
+        <li><a href="api.html">API референс</a></li>
+        <li><a href="install.html">Детальная установка</a></li>
+        <li><a href="jwt.html">Подробнее о JWT</a></li>
+        <li><a href="oauth.html">Подробнее о OAuth</a></li>
+        <li><a href="comparison.html">Сравнение технологий</a></li>
+      </ul>
+    </article>
+
+  </aside>
+
+</main>
+
+<footer class="footer container" role="contentinfo">
+  © 2025 AuthMaster — Учебный проект. Все права защищены.
+</footer>
+
+</div>
+
+<script src="js/main.js" defer></script>
+
+</body>
+</html>

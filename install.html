@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AuthMaster — Установка</title>
+
+  <link rel="icon" href="images/favicon.jpg">
+
+  <!-- Pico CSS -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<div class="wrapper">
+
+  <!-- ================= HEADER ================= -->
+
+  <header class="header container" role="banner">
+
+  <div class="brand">
+  <a href="index.html" aria-label="AuthMaster — Главная">
+    <img src="images/logo.jpg"
+         alt="AuthMaster"
+         class="brand__logo">
+  </a>
+  <span class="brand__title">AuthMaster</span>
+</div>
+
+    <nav class="header__nav"
+         role="navigation"
+         aria-label="Главная навигация">
+
+      <a href="index.html">Главная</a>
+      <a href="jwt.html">JWT</a>
+      <a href="oauth.html">OAuth 2.0</a>
+      <a href="comparison.html">Сравнение</a>
+      <a href="install.html" aria-current="page">Установка</a>
+      <a href="api.html">API</a>
+      <a href="docs.html">Документация</a>
+      <a href="contact.html">Контакты</a>
+
+    </nav>
+
+    <button class="burger"
+            aria-label="Открыть меню"
+            aria-expanded="false">
+      <span class="burger__box" aria-hidden="true">
+        <span class="burger__bar"></span>
+        <span class="burger__bar"></span>
+        <span class="burger__bar"></span>
+      </span>
+    </button>
+
+  </header>
+
+  <!-- ================= MAIN ================= -->
+
+  <main class="page container" role="main">
+
+  <div class="main">
+
+    <article>
+      <h1>Установка и настройка аутентификации</h1>
+      <p>
+        В этом разделе вы найдете пошаговые инструкции и примеры кода для
+        реализации JWT и OAuth 2.0 в ваших проектах. Мы рассмотрим
+        настройку серверной и клиентской частей для популярных языков
+        программирования и фреймворков.
+      </p>
+    </article>
+
+    <!-- JWT -->
+
+ <article id="jwt-install">
+
+  <h2><mark>Настройка JWT</mark></h2>
+
+  <p>
+    Для реализации JWT мы будем использовать популярные библиотеки
+    для разных языков программирования. Ниже приведены примеры для
+    Node.js и Python.
+  </p>
+
+  <div class="concepts">
+
+    <!-- Node.js -->
+    <section class="card-item">
+      <h3>1. Node.js (jsonwebtoken)</h3>
+
+      <p>
+        Установите библиотеку <code>jsonwebtoken</code> и настройте
+        сервер для создания и проверки JWT.
+      </p>
+
+<pre><code>npm install jsonwebtoken</code></pre>
+
+      <p>Пример серверного кода:</p>
+
+<pre><code>const express = require('express');
+const jwt = require('jsonwebtoken');
+
+const app = express();
+app.use(express.json());
+
+const JWT_SECRET = process.env.JWT_SECRET;
+
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+
+  if (username === 'user' && password === 'pass') {
+    const token = jwt.sign(
+      { username, role: 'user' },
+      JWT_SECRET,
+      { expiresIn: '1h' }
+    );
+    return res.json({ token });
+  }
+
+  return res.status(401).json({ message: 'Неверные учетные данные' });
+});
+</code></pre>
+
+      <div class="inner-card">
+        Рекомендуется хранить JWT в HTTP-only cookies.
+      </div>
+    </section>
+
+    <!-- Python -->
+    <section class="card-item">
+      <h3>2. Python (PyJWT)</h3>
+
+<pre><code>pip install PyJWT</code></pre>
+
+<pre><code>from flask import Flask, request, jsonify
+import jwt
+
+app = Flask(__name__)
+JWT_SECRET = 'your-secret-key'
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+
+    if data['username'] == 'user' and data['password'] == 'pass':
+        token = jwt.encode(
+            {'username': data['username'], 'role': 'user'},
+            JWT_SECRET,
+            algorithm='HS256'
+        )
+        return jsonify({'token': token})
+
+    return jsonify({'message': 'Неверные учетные данные'}), 401
+</code></pre>
+
+    </section>
+
+  </div>
+
+</article>
+
+    <!-- OAUTH -->
+
+  <article id="oauth-install">
+
+  <h2><mark>Настройка OAuth 2.0</mark></h2>
+
+  <div class="concepts">
+
+    <section class="card-item">
+      <h3>1. Регистрация приложения в Google</h3>
+
+      <ul>
+        <li>Создайте учетные данные OAuth 2.0 Client ID</li>
+        <li>Укажите redirect URI  
+          <code>http://localhost:3000/auth/callback</code>
+        </li>
+        <li>Получите <code>client_id</code> и <code>client_secret</code></li>
+      </ul>
+
+      <div class="inner-card">
+        Никогда не публикуйте client_secret в клиентском коде.
+      </div>
+    </section>
+
+    <section class="card-item">
+      <h3>2. Node.js (passport-google-oauth20)</h3>
+
+<pre><code>npm install passport 
+passport-google-oauth20 
+express-session</code></pre>
+
+      <div class="inner-card">
+        Используйте переменные окружения для хранения секретов.
+      </div>
+    </section>
+
+  </div>
+
+</article>
+
+    <!-- РЕКОМЕНДАЦИИ -->
+
+    <article>
+      <h2><mark>Дополнительные рекомендации</mark></h2>
+
+      <ul>
+        <li><strong>Безопасное хранение секретов:</strong> Используйте переменные окружения.</li>
+        <li><strong>HTTPS:</strong> Всегда используйте HTTPS.</li>
+        <li><strong>Обработка ошибок:</strong> Обрабатывайте случаи истечения токенов.</li>
+        <li><strong>Логирование:</strong> Отслеживайте попытки аутентификации.</li>
+        <li><strong>Тестирование:</strong> Тестируйте интеграцию локально.</li>
+      </ul>
+    </article>
+
+    <!-- NEXT STEPS -->
+
+   <article>
+
+  <h2><mark>Следующие шаги</mark></h2>
+
+  <div class="concepts">
+
+    <section class="card-item">
+      <h3>Погрузитесь в API</h3>
+      <p>
+        Изучите примеры интеграции в разделе 
+        <a href="api.html">API</a>.
+      </p>
+      <a href="api.html"
+         role="button"
+         class="contrast">
+         Изучить API
+      </a>
+    </section>
+
+    <section class="card-item">
+      <h3>Подробная документация</h3>
+      <p>
+        Ознакомьтесь с полной документацией 
+        в разделе 
+        <a href="docs.html">Документация</a>.
+      </p>
+      <a href="docs.html"
+         role="button"
+         class="contrast">
+         Перейти к документации
+      </a>
+    </section>
+
+  </div>
+
+</article>
+
+  </div>
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar" role="complementary">
+
+  <article>
+    <h3>Быстрая навигация</h3>
+
+    <nav aria-label="Боковая навигация">
+      <ul>
+        <li><a href="#jwt-install">Настройка JWT</a></li>
+        <li><a href="#oauth-install">Настройка OAuth 2.0</a></li>
+        <li><a href="jwt.html#implementation">Реализация JWT</a></li>
+        <li><a href="oauth.html#implementation">Реализация OAuth</a></li>
+        <li><a href="api.html">Работа с API</a></li>
+        <li><a href="docs.html">Документация</a></li>
+      </ul>
+    </nav>
+  </article>
+
+  <article>
+    <h3>Полезные ресурсы</h3>
+
+    <ul>
+      <li><a href="https://jwt.io/libraries" target="_blank">Библиотеки JWT</a></li>
+      <li><a href="https://oauth.net/code/" target="_blank">Библиотеки OAuth 2.0</a></li>
+      <li><a href="https://developers.google.com/identity" target="_blank">Google Identity</a></li>
+      <li><a href="https://auth0.com/docs" target="_blank">Документация Auth0</a></li>
+    </ul>
+  </article>
+
+ <article>
+  <h3>Подписка на обновления</h3>
+
+  <form data-demo>
+
+    <label for="email">
+      Email для уведомлений:
+      <input type="email"
+             id="email"
+             placeholder="your@email.com"
+             required>
+    </label>
+
+    <label>
+      <input type="checkbox" checked>
+      Уведомлять о новых статьях
+    </label>
+
+    <button type="submit" class="contrast">
+      Подписаться
+    </button>
+
+  </form>
+</article>
+</aside>
+</main>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer class="footer" role="contentinfo">
+    © 2025 AuthMaster — Учебный проект. Все права защищены.
+  </footer>
+
+</div>
+
+<script src="js/main.js" defer></script>
+
+</body>
+</html>

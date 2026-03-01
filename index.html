@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AuthMaster — Главная</title>
+
+  <link rel="icon" href="images/favicon.jpg">
+
+  <!-- Pico CSS -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<div class="wrapper">
+
+  <!-- ================= HEADER ================= -->
+
+  <header class="header container" role="banner">
+
+  <div class="brand">
+  <a href="index.html" aria-label="AuthMaster — Главная">
+    <img src="images/logo.jpg"
+         alt="AuthMaster"
+         class="brand__logo">
+  </a>
+  <span class="brand__title">AuthMaster</span>
+</div>
+
+    <nav class="header__nav"
+         role="navigation"
+         aria-label="Главная навигация">
+
+      <a href="index.html" aria-current="page">Главная</a>
+      <a href="jwt.html">JWT</a>
+      <a href="oauth.html">OAuth 2.0</a>
+      <a href="comparison.html">Сравнение</a>
+      <a href="install.html">Установка</a>
+      <a href="api.html">API</a>
+      <a href="docs.html">Документация</a>
+      <a href="contact.html">Контакты</a>
+
+    </nav>
+
+    <button class="burger"
+            aria-label="Открыть меню"
+            aria-expanded="false">
+      <span class="burger__box" aria-hidden="true">
+        <span class="burger__bar"></span>
+        <span class="burger__bar"></span>
+        <span class="burger__bar"></span>
+      </span>
+    </button>
+
+  </header>
+
+  <!-- ================= MAIN ================= -->
+
+  <main class="page container" role="main">
+
+    <div class="main">
+      
+      <!-- ===== Section 1 ===== -->
+ <article>
+      <section class="card" aria-labelledby="page-title">
+
+        <h1 id="page-title" class="page-title">
+          Основные понятия аутентификации
+        </h1>
+
+        <div class="concepts">
+
+          <div class="concept card-item">
+           <h2><mark>Аутентификация</mark></h2>
+            <p>
+              Процесс проверки подлинности пользователя.<br>
+              Отвечает на вопрос "Кто вы?".<br>
+              Примеры: вход по логину/паролю, биометрия,
+              одноразовые коды.
+            </p>
+          </div>
+
+          <div class="concept card-item">
+            <h2><mark>Авторизация</mark></h2>
+            <p>
+              Определение прав доступа пользователя.<br>
+              Отвечает на вопрос "Что вам разрешено?".<br>
+              Примеры: доступ к админ-панели,
+              редактирование профиля.
+            </p>
+          </div>
+
+          <div class="concept card-item">
+            <h2><mark>JWT (JSON Web Token)</mark></h2>
+            <p>
+              Стандарт для создания токенов доступа,
+              содержащих закодированные данные о пользователе.
+              Состоит из трех частей: заголовок,
+              полезная нагрузка и подпись.
+            </p>
+          </div>
+
+          <div class="concept card-item">
+            <h2><mark>OAuth 2.0</mark></h2>
+            <p>
+              Протокол для безопасной делегированной авторизации.
+              Позволяет приложениям получать ограниченный доступ
+              к данным пользователя без передачи пароля.
+            </p>
+          </div>
+
+        </div>
+
+      </section>
+</article>
+      <!-- ===== Table ===== -->
+
+   <article>
+
+  <h2>Как выбрать технологию для вашего проекта?</h2>
+
+  <figure>
+    <table role="grid" class="striped hover">
+      <thead>
+        <tr>
+          <th>Тип проекта</th>
+          <th>Рекомендуемая технология</th>
+          <th>Причина</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>SPA</td>
+          <td>JWT + HTTP-only cookies</td>
+          <td>Хорошо работает с JS-фреймворками</td>
+        </tr>
+        <tr>
+          <td>Мобильное приложение</td>
+          <td>OAuth 2.0 + PKCE</td>
+          <td>Защита от перехвата токенов</td>
+        </tr>
+        <tr>
+          <td>Традиционный веб-сайт</td>
+          <td>Сессии + cookies</td>
+          <td>Простота реализации</td>
+        </tr>
+      </tbody>
+    </table>
+  </figure>
+
+</article>
+
+      <!-- ===== Use Cases ===== -->
+
+      <article>
+
+        <h2>Реальные сценарии использования</h2>
+
+        <div class="use-cases">
+
+          <div class="concept card-item">
+            <h3><mark>Интернет-магазин</mark></h3>
+            <p><strong>Технология:</strong> Сессии + JWT для API</p>
+            <p><strong>Задачи:</strong> Личный кабинет, история заказов,
+              корзина покупок</p>
+          </div>
+
+          <div class="concept card-item">
+            <h3><mark>Бизнес-приложение</mark></h3>
+            <p><strong>Технология:</strong> OAuth 2.0 + JWT</p>
+            <p><strong>Задачи:</strong> Интеграция с Google Workspace,
+              ролевой доступ, аудит действий</p>
+          </div>
+
+          <div class="concept card-item">
+            <h3><mark>Игровая платформа</mark></h3>
+            <p><strong>Технология:</strong> JWT + социальные входы</p>
+            <p><strong>Задачи:</strong> Быстрая авторизация,
+              прогресс игрока, кроссплатформенность</p>
+          </div>
+
+        </div>
+
+      </article>
+
+      <!-- ===== Security ===== -->
+
+      <article>
+
+        <h2>Лучшие практики безопасности</h2>
+
+        <ul class="best-practices">
+          <li><strong>Хеширование паролей:</strong>
+            Всегда используйте bcrypt или Argon2</li>
+          <li><strong>Время жизни токенов:</strong>
+            Access tokens - короткие (15-60 мин),
+            Refresh tokens - длинные</li>
+          <li><strong>HTTPS:</strong>
+            Обязательно используйте шифрование
+            для всего трафика</li>
+          <li><strong>Валидация входных данных:</strong>
+            Проверяйте и санируйте все пользовательские данные</li>
+          <li><strong>Лимиты попыток входа:</strong>
+            Защита от брут-форс атак</li>
+          <li><strong>Регулярное обновление зависимостей:</strong>
+            Своевременно обновляйте библиотеки безопасности</li>
+        </ul>
+
+      </article>
+
+      <!-- ===== Mistakes ===== -->
+
+      <article>
+
+        <h2>Частые ошибки и как их избежать</h2>
+
+        <div class="mistakes">
+
+          <div class="mistake card-item">
+            <h3><mark>Хранение JWT в localStorage</mark></h3>
+            <p><strong>Проблема:</strong> Уязвимость к XSS-атакам</p>
+            <p><strong>Решение:</strong> Используйте HTTP-only cookies</p>
+          </div>
+
+          <div class="mistake card-item">
+            <h3><mark>Слишком длинные сессии</mark></h3>
+            <p><strong>Проблема:</strong> Риск перехвата активной сессии</p>
+            <p><strong>Решение:</strong>
+              Установите разумное время жизни сессии</p>
+          </div>
+
+          <div class="mistake card-item">
+            <h3><mark>Отсутствие rate limiting</mark></h3>
+            <p><strong>Проблема:</strong>
+              Возможность брут-форс атак</p>
+            <p><strong>Решение:</strong>
+              Добавьте ограничения на количество запросов</p>
+          </div>
+
+        </div>
+
+      </article>
+
+      <!-- ===== Next Steps ===== -->
+<article>
+      <section class="next-steps-section">
+
+        <h2>Следующие шаги в изучении</h2>
+
+        <div class="next-steps">
+
+          <article class="step">
+            <h3><mark>Изучите JWT глубже</mark></h3>
+            <p>
+              Перейдите в раздел JWT чтобы понять структуру токенов,
+              алгоритмы подписи и практические примеры реализации
+            </p>
+            <a href="jwt.html" role="button" class="contrast">
+  Изучить JWT
+</a>
+
+          </article>
+
+          <article class="step">
+            <h3><mark>Освойте OAuth 2.0</mark></h3>
+            <p>
+              В разделе OAuth вы найдете подробное объяснение
+              потоков авторизации, ролей участников и настроек провайдеров
+            </p>
+           <a href="oauth.html" role="button" class="contrast">
+  Изучить OAuth
+</a>
+
+
+          </article>
+
+          <article class="step">
+            <h3><mark>Практика</mark></h3>
+            <p>
+              В разделе установки найдете готовые примеры кода
+              и инструкции по настройке библиотек аутентификации
+            </p>
+           <a href="install.html" role="button" class="contrast">
+  Начать практику
+</a>
+          </article>
+
+        </div>
+
+      </section>
+</article>
+    </div>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar" role="complementary">
+
+        <article>
+    <h3>Быстрая навигация</h3>
+
+    <nav aria-label="Боковая навигация">
+      <ul>
+        <li><a href="jwt.html#structure">Структура JWT токена</a></li>
+        <li><a href="jwt.html#implementation">Реализация JWT</a></li>
+        <li><a href="oauth.html#flows">Потоки OAuth 2.0</a></li>
+        <li><a href="oauth.html#providers">Провайдеры OAuth</a></li>
+        <li><a href="security.html#best-practices">Лучшие практики</a></li>
+        <li><a href="security.html#common-mistakes">Частые ошибки</a></li>
+      </ul>
+    </nav>
+  </article>
+
+  <article>
+    <h3>Подписка на обновления</h3>
+
+    <form data-demo>
+
+      <label for="email">
+        Email для уведомлений:
+        <input type="email"
+               id="email"
+               placeholder="your@email.com"
+               required>
+      </label>
+
+      <label>
+        <input type="checkbox" checked>
+        Уведомлять о новых статьях
+      </label>
+
+      <button type="submit" class="contrast">
+  Подписаться
+</button>
+
+    </form>
+  </article>
+
+</aside>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer class="footer" role="contentinfo">
+    © 2025 AuthMaster — Учебный проект.
+    Все права защищены.
+  </footer>
+
+</div>
+
+<script src="js/main.js" defer></script>
+
+</body>
+</html>
