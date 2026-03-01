@@ -9,9 +9,9 @@ https://irinapodorova.github.io/pico/
 HTML5
 CSS3 (Windi CSS)
 JavaScript (для базового взаимодействия)
+
 Запуск
-Откройте index.html через Live Server в VS Code.
-Или посетите сайт на GitHub Pages.
+Откройте index.html через Live Server в VS Code или посетите сайт на GitHub Pages.
 Автор
 ФИО: Подорова Ирина Алексеевна
 Группа: 335 Б
